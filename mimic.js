@@ -142,6 +142,7 @@ detector.addEventListener("onImageResultsSuccess", function(faces, image, timest
 
 // Draw the detected facial feature points on the image
 function drawFeaturePoints(canvas, img, face) {
+
   // Obtain a 2D context object to draw on the canvas
   var ctx = canvas.getContext('2d');
 
@@ -152,7 +153,9 @@ function drawFeaturePoints(canvas, img, face) {
   // Loop over each feature point in the face
   for (var id in face.featurePoints) {
     var featurePoint = face.featurePoints[id];
-
+    ctx.beginPath();
+    ctx.arc(featurePoint.x, featurePoint.y, 1, 0, 2 * Math.PI);
+    ctx.stroke();
     // TODO: Draw feature point, e.g. as a circle using ctx.arc()
     // See: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
     // <your code here>
@@ -163,6 +166,12 @@ function drawFeaturePoints(canvas, img, face) {
 function drawEmoji(canvas, img, face) {
   // Obtain a 2D context object to draw on the canvas
   var ctx = canvas.getContext('2d');
+  var emojiLocation = face.featurePoints[0];
+
+    ctx.font = '48px serif';
+//    ctx.strokeText(face.emojis.dominantEmoji, emojiLocation.x, emojiLocation.y);
+
+ctx.fillText(face.emojis.dominantEmoji, 50, 100);
 
   // TODO: Set the font and style you want for the emoji
   // <your code here>
